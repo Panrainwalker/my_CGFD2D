@@ -17,8 +17,6 @@ For more advanced 3D versions with curvilinear grids and full features, please r
 
 If you use or modify this code in your own research, please cite the following foundational papers:
 
-
-If you use this code in your research, please **cite the following references**:
 ```plaintext
 @article{Zhang2006,
 author={W. Zhang and X.f. Chen},
