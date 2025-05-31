@@ -1,10 +1,9 @@
 # CGFD2D (MATLAB Version)
 
-This repository contains a MATLAB implementation of the **Collocated-grid Finite-Difference (CGFD)** method for 2D elastic wave propagation simulation in isotropic media.
+This repository contains a MATLAB implementation of the **Cuvilinear-grid Finite-Difference (CGFD)** method for 2D elastic wave propagation simulation in isotropic media.
 
 This implementation is based on the numerical frameworks developed by Prof. Wei Zhang and his collaborators. The code is being developed as part of my independent effort to learn, implement, and understand seismic wave modeling.
 
-> ⚠️ Note: This version does **not** implement curvilinear grids.
 
 ---
 
