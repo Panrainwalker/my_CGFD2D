@@ -30,7 +30,7 @@ Flag_grid = 2;
 %%%%% media %%%%%
 % 1 Half-space model Grid
 % 2 Two-layer model
-Flag_media = 1;
+Flag_media = 2;
 
 %%%%% source %%%%%
 
