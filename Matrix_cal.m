@@ -29,83 +29,62 @@
 % zt_z : partial derivative of zt with respect to z  --> 2D vector [nz-3, nx-6]
 % jac  : Jacobian matirx 
 
+
+x_xi = zeros(nz,nx);
+x_zt = zeros(nz,nx);
+z_xi = zeros(nz,nx);
+z_zt = zeros(nz,nx);
+
+Jac = zeros(nz,nx);
+xi_x = zeros(nz,nx);
+xi_z = zeros(nz,nx);
+zt_x = zeros(nz,nx);
+zt_z = zeros(nz,nx);
 %% 
 % x_xi calculation
-for i = 4:size(x_gd,1)-6 %nz
-    for j= 4:size(x_gd,2)-6 %nx
-        x_xi(i-3,j-3) = mac_center_all_coef(Stencil_flag,1)*x_gd(i,j-3)+...
-            mac_center_all_coef(Stencil_flag,2)*x_gd(i,j-2)+...
-            mac_center_all_coef(Stencil_flag,3)*x_gd(i,j-1)+...
-            mac_center_all_coef(Stencil_flag,4)*x_gd(i,j-0)+...
-            mac_center_all_coef(Stencil_flag,5)*x_gd(i,j+1)+...
-            mac_center_all_coef(Stencil_flag,6)*x_gd(i,j+2)+...
-            mac_center_all_coef(Stencil_flag,7)*x_gd(i,j+3);
+for i = 4:size(x_gd,1)-3 %nz
+    for j= 4:size(x_gd,2)-3 %nx
+        x_xi(i,j) = (mac_center_all_coef(Stencil_flag,:)*x_gd(i,j-3:j+3)')/(xi_gd(2)-xi_gd(1));
     end
 end
 
 % z_xi calculation
-for i = 4:size(x_gd,1)-6 %nz
-    for j= 4:size(x_gd,2)-6 %nx
-        z_xi(i-3,j-3) = mac_center_all_coef(Stencil_flag,1)*z_gd(i,j-3)+...
-            mac_center_all_coef(Stencil_flag,2)*z_gd(i,j-2)+...
-            mac_center_all_coef(Stencil_flag,3)*z_gd(i,j-1)+...
-            mac_center_all_coef(Stencil_flag,4)*z_gd(i,j-0)+...
-            mac_center_all_coef(Stencil_flag,5)*z_gd(i,j+1)+...
-            mac_center_all_coef(Stencil_flag,6)*z_gd(i,j+2)+...
-            mac_center_all_coef(Stencil_flag,7)*z_gd(i,j+3);
+for i = 4:size(x_gd,1)-3 %nz
+    for j= 4:size(x_gd,2)-3 %nx
+        z_xi(i,j) = (mac_center_all_coef(Stencil_flag,:)*z_gd(i,j-3:j+3)')/(zt_gd(2)-zt_gd(1));
     end
 end
 
 % x_zt calculation
-for i = 4:size(x_gd,1)-6 %nz
-    for j= 4:size(x_gd,2)-6 %nx
-        x_zt(i-3,j-3) = mac_center_all_coef(Stencil_flag,1)*x_gd(i-3,j)+...
-            mac_center_all_coef(Stencil_flag,2)*x_gd(i-2,j)+...
-            mac_center_all_coef(Stencil_flag,3)*x_gd(i-1,j)+...
-            mac_center_all_coef(Stencil_flag,4)*x_gd(i-0,j)+...
-            mac_center_all_coef(Stencil_flag,5)*x_gd(i+1,j)+...
-            mac_center_all_coef(Stencil_flag,6)*x_gd(i+2,j)+...
-            mac_center_all_coef(Stencil_flag,7)*x_gd(i+3,j);
+for i = 4:size(x_gd,1)-3 %nz
+    for j= 4:size(x_gd,2)-3 %nx
+        x_zt(i,j) = (mac_center_all_coef(Stencil_flag,:)*x_gd(i-3:i+3,j))/(xi_gd(2)-xi_gd(1));
     end
 end
 
 % z_zt calculation
-for i = 4:size(x_gd,1)-6 %nz
-    for j= 4:size(x_gd,2)-6 %nx
-        z_zt(i-3,j-3) = mac_center_all_coef(Stencil_flag,1)*z_gd(i-3,j)+...
-            mac_center_all_coef(Stencil_flag,2)*z_gd(i-2,j)+...
-            mac_center_all_coef(Stencil_flag,3)*z_gd(i-1,j)+...
-            mac_center_all_coef(Stencil_flag,4)*z_gd(i-0,j)+...
-            mac_center_all_coef(Stencil_flag,5)*z_gd(i+1,j)+...
-            mac_center_all_coef(Stencil_flag,6)*z_gd(i+2,j)+...
-            mac_center_all_coef(Stencil_flag,7)*z_gd(i+3,j);
+for i = 4:size(x_gd,1)-3 %nz
+    for j= 4:size(x_gd,2)-3 %nx
+        z_zt(i,j) = (mac_center_all_coef(Stencil_flag,:)*z_gd(i-3:i+3,j))/(zt_gd(2)-zt_gd(1));
     end
 end
 
 % Jac calculation
-Jac = x_xi.*z_zt - x_zt.*z_xi;
+Jac(4:end-3,4:end-3) = x_xi(4:end-3,4:end-3).*z_zt(4:end-3,4:end-3) - x_zt(4:end-3,4:end-3).*z_xi(4:end-3,4:end-3);
 
-xi_x = (1./Jac) .* z_zt;
-xi_z = -(1./Jac) .* x_zt;
-zt_x = -(1./Jac) .* z_xi;
-zt_z = (1./Jac) .* x_xi;
+xi_x(4:end-3,4:end-3) = (1./Jac(4:end-3,4:end-3)) .* z_zt(4:end-3,4:end-3);
+xi_z(4:end-3,4:end-3) = -(1./Jac(4:end-3,4:end-3)) .* x_zt(4:end-3,4:end-3);
+zt_x(4:end-3,4:end-3) = -(1./Jac(4:end-3,4:end-3)) .* z_xi(4:end-3,4:end-3);
+zt_z(4:end-3,4:end-3) = (1./Jac(4:end-3,4:end-3)) .* x_xi(4:end-3,4:end-3);
 
 if Matrix_disp==1
     figure;
-    imagesc(Jac)
+    pcolor(x_gd, z_gd, Jac);
+    shading flat;
     axis equal tight
     xlabel('x index');
     ylabel('z index');
     title('Matrix for Jac');
-end
-
-if Matrix_disp==1
-    figure;
-    imagesc(xi_z)
-    axis equal tight
-    xlabel('x index');
-    ylabel('z index');
-    title('Matrix for xi_z');
 end
 
 

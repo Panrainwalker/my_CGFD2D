@@ -12,20 +12,22 @@ clc;clear;close all;
 
 %% parameters (Stencil, grid, media, source)
 %%%%% Time %%%%%
-T_total = 0.5;     % unit (s)
+T_total = 0.1;     % unit (s)
 
 %%%%% Figure %%%%%
 Grid_disp = 0;
 Matrix_disp = 0;
-Media_disp = 1;
+Media_disp = 0;
+Src_disp = 0;
 %%%%% Stencil %%%%%
-Stencil_flag = 3;
+Stencil_flag = 3; % for matrix 
+
 
 
 %%%%% grid %%%%%
 % 1 Cartesian Grid
 % 2 Curvilinear Grid
-Flag_grid = 2;
+Flag_grid = 1;
 
 %%%%% media %%%%%
 % 1 Half-space model Grid
@@ -33,6 +35,12 @@ Flag_grid = 2;
 Flag_media = 1;
 
 %%%%% source %%%%%
+src_ix = 50; % source index
+src_iz = 20; 
+
+src_t_end=0.05;
+fc = 100 ; %Hz
+t0 = 0.01  ; %s
 
 
 %% Stencil 
@@ -46,6 +54,16 @@ Matrix_cal;
 
 %% Media initial
 Media_init_t;
+
+
+%% Source initial
+Src_init_t;
+
+
+%% solver
+sv_rk_curv_col_allstage;
+
+
 
 
 

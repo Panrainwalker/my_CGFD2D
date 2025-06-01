@@ -13,12 +13,16 @@
 % topo : free surface topography [Default: flat layer] --> 1D vector
 
 % outputs:
-% x_gd : Physical grid  --> 2D vector
-% z_gd : Physical grid  --> 2D vector
+% nt : number of time step  --> 1D vector
+% dt : length of time step  --> 1D vector
 
-% xi_gd : computational grid  --> 2D vector
-% zt_gd : computational grid  --> 2D vector
+% Vs  : S wave velocity (km/s)  --> 2D array
+% Vp  : P wave velocity (km/s)  --> 2D array
+% rho : desity  (kg/m^3)  --> 2D array
 
+% mu  : shear modulus       --> 2D array
+% lam : Lamé parameter      --> 2D array
+% lam2mu : λ + 2μ           --> 2D array
 
 %%
 % 1 Half-space model Grid
@@ -39,7 +43,7 @@ if Flag_media == 1
 
 elseif Flag_media == 2
     disp('Two-layer model');
-    depth_threshold = -20;           
+    depth_threshold = -30;           
     transition_width = 5;           
 
     mask_deep = z_gd > (depth_threshold + transition_width/2);
@@ -88,12 +92,11 @@ Vs_max = max(max(Vs));
 Vs_min = min(min(Vs));
 
 
-dt = 1.0 * dh / Vp_max;
-nt = (T_total/dt) + 1;
+dt = (1.0 * dh / Vp_max) / 1;
+nt = round(T_total/dt) + 1;
 
 disp(['Vp_min=',num2str(Vp_min),'; Vp_max=',num2str(Vp_max)]);
 disp(['Vs_min=',num2str(Vs_min),'; Vs_max=',num2str(Vs_max)]);
-
 disp(['dt=',num2str(dt),'; nt=',num2str(nt)]);
 
 
