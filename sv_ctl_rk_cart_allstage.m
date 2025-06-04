@@ -31,7 +31,7 @@ while 1
     % calculate derivatives
     cal_center
     %
-    ass_rhs;
+    ass_rhs_cart;
     % add source
     Add_source;
     %-update W  Euler

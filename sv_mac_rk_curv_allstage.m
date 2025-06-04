@@ -31,28 +31,28 @@ while 1
     % Stage 1
     W = mW;
     cal_macF
-    ass_rhs_cart;
+    ass_rhs_curv;
     Add_source;
     k1 = hW;
     
     % Stage 2
     W = mW + RK4a(2) * k1;
     cal_macB;
-    ass_rhs_cart;
+    ass_rhs_curv;
     Add_source;
     k2 = hW;
     
     % Stage 3
     W = mW + RK4a(3) * k2;
     cal_macF;
-    ass_rhs_cart;
+    ass_rhs_curv;
     Add_source;
     k3 = hW;
     
     % Stage 4
     W = mW + RK4a(4) * k3;
     cal_macB;
-    ass_rhs_cart;
+    ass_rhs_curv;
     Add_source;
     k4 = hW;
     
@@ -72,28 +72,28 @@ while 1
     % Stage 1
     W = mW;
     cal_macB;
-    ass_rhs_cart;
+    ass_rhs_curv;
     Add_source;
     k1 = hW;
     
     % Stage 2
     W = mW + RK4a(2) * k1;
     cal_macF;
-    ass_rhs_cart;
+    ass_rhs_curv;
     Add_source;
     k2 = hW;
     
     % Stage 3
     W = mW + RK4a(3) * k2;
     cal_macB;
-    ass_rhs_cart;
+    ass_rhs_curv;
     Add_source;
     k3 = hW;
     
     % Stage 4
     W = mW + RK4a(4) * k3;
     cal_macF;
-    ass_rhs_cart;
+    ass_rhs_curv;
     Add_source;
     k4 = hW;
     
