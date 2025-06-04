@@ -18,7 +18,7 @@ Grid_disp = 0;
 
 %%%%% media %%%%%
 Flag_media = 1;
-Media_disp = 1;
+Media_disp = 0;
 
 %%%%% source %%%%%
 src_ix = 100 + 3; % source index
@@ -28,7 +28,8 @@ T_end = T_total;
 fc = 30 ;    %Hz
 t0 = 0.04  ; %s
 
-Src_disp = 1;
+Src_disp = 0;
+
 %%%%% station %%%%%
 stax = 50;
 staz = 50;
@@ -70,5 +71,8 @@ RK4a = RK4a .* dt;
 RK4b = RK4b .* dt;
 RK6a = RK6a .* dt;
 RK6b = RK6b .* dt;
+
+
+
 figure
 sv_ctl_rk_cart_allstage;
