@@ -22,7 +22,7 @@ mW = zeros(nz,nx,5);   % middle variance
 
 
 while 1
-   
+    
     
     
     it = it + 1
@@ -33,42 +33,43 @@ while 1
     
     % Stage 1
     W = mW;
-    cal_center;
+    cal_center_opt;
     ass_rhs_cart;
     Add_source;
     k1 = hW;
     
     % Stage 2
     W = mW + RK4a(2) * k1;
-    cal_center;
+    cal_center_opt;
     ass_rhs_cart;
     Add_source;
     k2 = hW;
     
     % Stage 3
     W = mW + RK4a(3) * k2;
-    cal_center;
+    cal_center_opt;
     ass_rhs_cart;
     Add_source;
     k3 = hW;
     
     % Stage 4
     W = mW + RK4a(4) * k3;
-    cal_center;
+    cal_center_opt;
     ass_rhs_cart;
     Add_source;
     k4 = hW;
     
     % Final RK4 combination
     W = mW + RK4b(1) * k1 + RK4b(2) * k2 + RK4b(3) * k3 + RK4b(4) * k4;
-    
-    if mod(it,100)==0
-        pcolor(x_gd,z_gd, W(:,:,1));
-        shading flat;
-        colorbar;
-        title(['Vx: ',num2str((it)*dt),'s']);
-%         caxis([-1e-5 1e-5])
-        pause(0.1);
+    if flag_snap ==1
+        if mod(it,100)==0
+            pcolor(x_gd,z_gd, W(:,:,1));
+            shading flat;
+            colorbar;
+            title(['Vx: ',num2str((it)*dt),'s']);
+            %         caxis([-1e-5 1e-5])
+            pause(0.1);
+        end
     end
     
     
