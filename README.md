@@ -1,45 +1,42 @@
 # CGFD2D (Learning Version) — 2D Finite Difference Solver for Elastic Waves
 
-This repository contains 2D finite-difference solvers developed for learning and research purposes. It is inspired by the 3D collocated-grid finite-difference method (CGFD3D) and adapted to Cartesian and curvilinear coordinate systems for seismic wave simulation.
+This repository contains 2D finite-difference solvers developed for learning and research purposes. 
 
 ## 📚 Purpose
 
 The code is developed and maintained for learning and exploring numerical methods for seismic wave modeling. It includes several finite-difference schemes and serves as a simplified educational version of the CGFD3D method.
 
-##  Main Features
-
-- **2D elastic wave simulation** in isotropic media.
-- Support for **Cartesian and curvilinear grids**.
-- Multiple spatial schemes: 2nd-order central difference, explicit filtering, and MacCormack scheme.
-- Runge-Kutta time integration.
-
 ##  Main Programs
 
-- `main_cart_center.m`:  
-  Central difference scheme on Cartesian grid (may suffer from odd-even decoupling).
-
-- `main_cart_filter.m`:  
-  Uses explicit filtering to improve solution quality.
-
-- `main_cart_mac.m`:  
-  Uses MacCormack scheme on Cartesian grid.
-
+- `main_cart.m`:  
+  FD in Cartesian grid
+ 
 - `main_curv_mac.m`:  
-  MacCormack scheme in curvilinear coordinates (if available).
+  FD in Curvilinear grid
 
-##  Directory Structure
+##  Solver
 
-Essential scripts:
-- `Add_source.m`, `fun_ricker.m`: Source term setup.
-- `Media_init_t.m`, `Grid_init_t.m`, `Src_init_t.m`, `Stencil_t.m`: Model initialization.
-- `cal_macF.m`, `cal_macB.m`, `cal_center.m`, `ass_rhs.m`: Numerical scheme operations.
-- `sv_ctl_rk_cart_allstage.m`, `sv_mac_rk_cart_allstage.m`: Time stepping via RK4.
+- **MacCormack Scheme (MAC)**  
+
+- **Operator Splitting (OS)**  
+
+- **Central Difference Scheme (CTL)**  
+
+- **Explicit Filtering (FLT)**  
+
+**Time Integration**:  
+All solvers use **classic 4th-order Runge-Kutta**. 
+
+**Source Term**:  
+The source is added in each substage via `Add_source.m`. 
+
 
 ##  Usage
 
 Run any of the main scripts in MATLAB:
 ```matlab
->> main_cart_mac
+>> main_cart
+>> main_curv
 ```
 
 ##  Citations
