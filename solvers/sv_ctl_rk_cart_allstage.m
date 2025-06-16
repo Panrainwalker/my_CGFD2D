@@ -61,6 +61,7 @@ while 1
     
     % Final RK4 combination
     W = mW + RK4b(1) * k1 + RK4b(2) * k2 + RK4b(3) * k3 + RK4b(4) * k4;
+<<<<<<< Updated upstream
     if flag_snap ==1
         if mod(it,100)==0
             pcolor(x_gd,z_gd, W(:,:,1));
@@ -71,6 +72,22 @@ while 1
             pause(0.1);
         end
     end
+=======
     
+    Vxr(it) = W(staz  ,stax,1);
+    Vzr(it) = W(staz  ,stax,2);
+>>>>>>> Stashed changes
+    
+    if flag_snap == 1;
+        if mod(it,100)==0
+            pcolor(x_gd,z_gd, W(:,:,1));
+            shading flat;
+            colorbar;
+            title(['Vx: ',num2str((it)*dt),'s']);
+            %         caxis([-1e-5 1e-5])
+            pause(0.1);
+        end
+    end
+
     
 end

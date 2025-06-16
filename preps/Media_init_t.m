@@ -92,8 +92,8 @@ Vp_min = min(min(Vp));
 Vs_max = max(max(Vs));
 Vs_min = min(min(Vs));
 
-
-dt = (0.1 * dh / Vp_max) ;
+CFL=0.8
+dt = (CFL * dh / Vp_max) ;
 % dt = 1e-6 ;
 nt = round(T_total/dt) + 1;
 

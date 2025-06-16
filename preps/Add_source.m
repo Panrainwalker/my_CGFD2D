@@ -8,10 +8,9 @@
 % -------------------------------------------------------------------------
 %%%%%%
 
-% hW(src_iz,src_ix,1) = hW(src_iz,src_ix,1) + stf(it) * 1e6;
-hW(src_iz,src_ix,2) = hW(src_iz,src_ix,2) + stf(it) * 1e6;
+hW(src_iz,src_ix,1) = hW(src_iz,src_ix,1) + stf(it) * 1e6;
+% hW(src_iz,src_ix,2) = hW(src_iz,src_ix,2) + stf(it) * 1e6;
 
 % hW(src_iz,src_ix,3) = hW(src_iz,src_ix,3) - stf(it)*1e6;
 % hW(M.izs,M.ixs,4) = hW(M.izs,M.ixs,4) - stf(it)*M.mzz;
 % hW(src_iz,src_ix,5) = hW(src_iz,src_ix,5) - stf(it)*1e6;
-

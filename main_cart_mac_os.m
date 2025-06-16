@@ -9,16 +9,16 @@
 %%%%%%
 
 clc;clear;close all
-addpaths;
+
 %% parameters (Time, Stencil, grid, media, source)
 %%%%% Time %%%%%
-T_total = 2;     % unit (s)
+T_total = 0.5;     % unit (s)
 
 %%%%% grid %%%%%
-nz=230 + 6;
-nx=430 + 6;
-length_z=1000;
-length_x=2000; % length of x: 200m
+nz=250 + 6;
+nx=500 + 6;
+length_z=500;
+length_x=1000; % length of x: 200m
 
 topo = 0 + zeros(1, nx); % topography
 
@@ -31,11 +31,11 @@ Flag_media = 1;
 Media_disp = 0;
 
 %%%%% source %%%%%
-src_ix = 215 + 3; % source index
-src_iz = 115 + 3;
+src_ix = 325 + 3; % source index
+src_iz = 125 + 3;
 
 T_end = T_total;
-fc = 20 ;    %Hz
+fc = 30 ;    %Hz
 t0 = 1.2/fc;
 Src_disp = 0;
 
@@ -71,7 +71,7 @@ Grid_init_t
 %% Media initial
 Media_init_t
 
-CFL=1.5;
+CFL=1.3;
 dt = ( CFL * dh / Vp_max) ;
 % dt = 1e-5 ;
 nt = round(T_total/dt) + 1;
@@ -80,7 +80,7 @@ Src_init_t
 
 %% absorbing boundary
 damp = ones(nz,nx);
-ndamp = 30;
+ndamp = 50;
 ivec = ni1 : ni1+ndamp-1;
 jvec = 1 : ndamp;
 %-- z1/z2
@@ -123,23 +123,30 @@ tic
 
 
 % 运行 MAC 模型
-sv_mac_rk_cart_os_allstage;
+sv_mac_rk_cart_allstage;
 Vzr_mac = Vzr;  % 保存结果
 
 % sv_mac_rk_cart_allstage_noabs;
 % Vzr_mac_noasb = Vzr;  % 保存结果
 
-
+% 运行 OS 模型（结果缩小 1/2）
 % sv_mac_rk_cart_os_allstage;
 % Vzr_os = Vzr;  % 保存结果
 
-
+% % % 运行 CTL 模型
 % sv_ctl_rk_cart_allstage;
+% Vzr_ctl = Vzr;
+% plot(Vzr_ctl/ max(Vzr_ctl), 'r-', 'DisplayName', 'CTL Model');
+% 
+% % 运行 FLT 模型
 % sv_flt_rk_cart_allstage;
+% Vzr_flt = Vzr;
+% plot(Vzr_flt/max(Vzr_flt), 'g--', 'DisplayName', 'FLT Model');
 
 
 
-
+t1 = toc;
+fprintf('Total computation and plotting time: %.2f seconds\n', t1);
 
 
 %%
@@ -150,7 +157,7 @@ if plot_sta ==1
 figure
 plot(Vzr_mac / max(abs(Vzr_mac)), 'r', 'DisplayName', 'MAC Model');
 hold on
-% plot(Vzr_mac_noasb / max(abs(Vzr_mac_noasb)), 'k--', 'DisplayName', 'OS Model');
+plot(Vzr_mac_noasb / max(abs(Vzr_mac_noasb)), 'k--', 'DisplayName', 'OS Model');
 % plot(10*(Vzr_os / max(abs(Vzr_os))-Vzr_mac / max(abs(Vzr_mac)))-1.5, 'b-', 'DisplayName', '10 * diff');
 
 legend;
@@ -164,7 +171,7 @@ fig = gcf;
 fig.Units = 'inches';
 fig.Position = [1, 1, 6, 4];
 
-
+ 
 
 if ~exist('output', 'dir')
     mkdir('output');

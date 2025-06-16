@@ -2,13 +2,13 @@ clc;clear;close all;
 
 %% parameters (Time, Stencil, grid, media, source)
 %%%%% Time %%%%%
-T_total = 0.25;     % unit (s)
+T_total = 0.17;     % unit (s)
 
 %%%%% grid %%%%%
-nz=200 + 6;
-nx=200 + 6;
-length_z=400;
-length_x=400; % length of x: 200m
+nz=400 + 6;
+nx=400 + 6;
+length_z=1000;
+length_x=1000; % length of x: 200m
 
 topo = 0 + zeros(1, nx); % topography
 
@@ -16,21 +16,21 @@ Flag_grid = 2; % 1: Cartesian Grid  /  2: Curvilinear Grid
 
 Grid_disp = 0; 
 %%%%% Matrix %%%%%
-Matrix_disp = 1;
+Matrix_disp = 0;
 
 %%%%% media %%%%%
 Flag_media = 1;
-Media_disp = 1;
+Media_disp = 0;
 
 %%%%% source %%%%%
-src_ix = 100 + 3; % source index
-src_iz = 10 + 3;
+src_ix = 200 + 3; % source index
+src_iz = 200 + 3;
 
 T_end = T_total;
 fc = 30 ;    %Hz
 t0 = 0.04  ; %s
 
-Src_disp = 1;
+Src_disp = 0;
 %%%%% station %%%%%
 stax = 50;
 staz = 50;
@@ -78,13 +78,13 @@ RK6a = RK6a .* dt;
 RK6b = RK6b .* dt;
 
 
-dx = xi_gd(2);
-dz = abs(zt_gd(2));
+
 MACF = MACF / dx;
 MACB = MACB / dx;
 
 
 flag_snap = 1;
+
 figure
 
 sv_mac_rk_curv_allstage;

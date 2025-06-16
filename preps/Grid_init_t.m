@@ -105,7 +105,7 @@ elseif Flag_grid == 2
         
         % Plot horizontal lines (along X)
         for j = 1:nz
-            if j <= 3  % Top 3 horizontal layers
+            if j <= half_fd_stentil  % Top  horizontal layers
                 plot(x_gd(j,1:5:end), z_gd(j,1:5:end), 'r', 'LineWidth', 1.5);  % red
             else
                 plot(x_gd(j,1:5:end), z_gd(j,1:5:end), 'k');  % black
@@ -134,7 +134,7 @@ d_diag2 = sqrt( (x_gd(2:end,1:end-1) - x_gd(1:end-1,2:end)).^2 + ...
     (z_gd(2:end,1:end-1) - z_gd(1:end-1,2:end)).^2 );
 
 d_diag = min(d_diag1, d_diag2);
-dh = min(min(d_diag));
+dh = min(min(d_diag))/2;
 dx=dh;dz=dh;
 
 x_center = 0.5 * (x_gd(2:end,2:end) + x_gd(1:end-1,1:end-1));
