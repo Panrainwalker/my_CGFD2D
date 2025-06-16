@@ -8,6 +8,7 @@ The code is developed and maintained for learning and exploring numerical method
 
 
 ## Project Structure
+```markdown
 .
 ├── addpaths.m    # Add all subdirectories to MATLAB path
 ├── boundarys     # Boundary condition implementations
@@ -17,7 +18,7 @@ The code is developed and maintained for learning and exploring numerical method
 ├── preps         # Model, grid, and source initialization
 ├── README.md  
 └── solvers       # Time integration and RHS solvers
-
+```
 
 ##  Main Programs
 
