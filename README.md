@@ -6,15 +6,34 @@ This repository contains 2D finite-difference solvers developed for learning and
 
 The code is developed and maintained for learning and exploring numerical methods for seismic wave modeling. It includes several finite-difference schemes and serves as a simplified educational version of the CGFD3D method.
 
+
+## Project Structure
+.
+├── addpaths.m    # Add all subdirectories to MATLAB path
+├── boundarys     # Boundary condition implementations
+├── diffs         # Finite difference stencil and operators
+├── main_cart.m   # Main script for cartesian grid
+├── main_curv.m   # Main script for curvilinear grid
+├── preps         # Model, grid, and source initialization
+├── README.md  
+└── solvers       # Time integration and RHS solvers
+
+
 ##  Main Programs
 
-- `main_cart.m`:  
-  FD in Cartesian grid
- 
-- `main_curv_mac.m`:  
-  FD in Curvilinear grid
+| Script         | Description                        |
+|----------------|------------------------------------|
+| `main_cart.m`  | FD modeling on a Cartesian grid     |
+| `main_curv.m`  | FD modeling on a curvilinear grid   |
 
-##  Solver
+Run either in MATLAB:
+
+```matlab
+>> main_cart
+>> main_curv
+```
+
+##  Numerical Methods
 
 - **MacCormack Scheme (MAC)**  
 
@@ -27,17 +46,6 @@ The code is developed and maintained for learning and exploring numerical method
 **Time Integration**:  
 All solvers use **classic 4th-order Runge-Kutta**. 
 
-**Source Term**:  
-The source is added in each substage via `Add_source.m`. 
-
-
-##  Usage
-
-Run any of the main scripts in MATLAB:
-```matlab
->> main_cart
->> main_curv
-```
 
 ##  Citations
 
