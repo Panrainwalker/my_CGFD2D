@@ -2,9 +2,17 @@
 
 This repository contains 2D finite-difference solvers developed for learning and research purposes. 
 
+
+
 ## 📚 Purpose
 
 The code is developed and maintained for learning and exploring numerical methods for seismic wave modeling. It includes several finite-difference schemes and serves as a simplified educational version of the CGFD3D method.
+
+##  Snapshot 
+
+Below is an example of the simulated Vx snapshot in a Guassian hill model: 
+
+![Vx wavefield](Vx_wavefield.gif)
 
 
 ## Project Structure
